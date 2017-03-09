@@ -1,7 +1,6 @@
 package com.hanbit.contentsapp.serviceImpl;
 
 import com.hanbit.contentsapp.domain.MemberBean;
-import com.hanbit.contentsapp.service.MemberService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,32 +12,27 @@ import java.util.List;
 public class MemberServiceImpl implements MemberService {
 MemberBean bean=new MemberBean();
     MemberService service=new MemberServiceImpl();
-   public static MemberServiceImpl getInstance(){
-        return getInstance();
-    }
-
     @Override
-    public void insert(MemberBean bean) {
+    public void add(MemberBean bean) {
 
     }
 
     @Override
-    public MemberBean selectOne(MemberBean bean) {
+    public MemberBean findOne(MemberBean bean) {
         MemberBean member =new MemberBean();
 
         return member;
     }
 
     @Override
-    public List<MemberBean> selectSome(MemberBean bean) {
+    public List<MemberBean> findSome(MemberBean bean) {
         List<MemberBean> list=new ArrayList<MemberBean>();
         return list;
     }
 
     @Override
     public List<MemberBean> list(MemberBean bean) {
-        List<MemberBean> list =new ArrayList<MemberBean>();
-
+        List<MemberBean> list=new ArrayList<MemberBean>();
         return list;
     }
 
