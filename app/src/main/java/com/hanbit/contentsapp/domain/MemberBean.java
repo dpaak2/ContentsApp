@@ -1,13 +1,12 @@
 package com.hanbit.contentsapp.domain;
 public class MemberBean {
-    protected String seq,name,phone,addr;
-
-    public String getSeq() {
-        return seq;
+    protected String id,name,age,phone,address,salary;
+    public String getId() {
+        return id;
     }
 
-    public void setSeq(String seq) {
-        this.seq = seq;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -18,6 +17,14 @@ public class MemberBean {
         this.name = name;
     }
 
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
     public String getPhone() {
         return phone;
     }
@@ -26,21 +33,33 @@ public class MemberBean {
         this.phone = phone;
     }
 
-    public String getAddr() {
-        return addr;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAddr(String addr) {
-        this.addr = addr;
+    public void setAddress(String address) {
+        this.address = address;
     }
+
+    public String getSalary() {
+        return salary;
+    }
+
+    public void setSalary(String salary) {
+        this.salary = salary;
+    }
+//id,name,age,phone,address,salary
+
 
     @Override
     public String toString() {
         return "MemberBean{" +
-                "seq='" + seq + '\'' +
+                "id='" + id + '\'' +
                 ", name='" + name + '\'' +
+                ", age='" + age + '\'' +
                 ", phone='" + phone + '\'' +
-                ", addr='" + addr + '\'' +
+                ", address='" + address + '\'' +
+                ", salary='" + salary + '\'' +
                 '}';
     }
 }
