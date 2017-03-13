@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#eeeee"
+    android:background="#eeeeeeee"
     android:padding="8dp">
     <ImageView
         android:id="@+id/profileImg"
@@ -14,7 +14,7 @@
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/profileImg"
+        android:layout_toRightOf="@id/profileImg"
         android:textSize="17dp"
         android:textStyle="bold"
         android:text="Name"/>
@@ -22,7 +22,7 @@
         android:id="@+id/tvPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/tvName"
+        android:layout_toRightOf="@id/tvName"
         android:textSize="15dp"
         android:textStyle="normal"
         android:text="Phone"/>

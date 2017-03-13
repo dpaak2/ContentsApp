@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -22,33 +23,55 @@ import com.hanbit.contentsapp.service.ListService;
 
 import java.util.ArrayList;
 
+import static com.hanbit.contentsapp.R.id.mList;
+
 public class MemberListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_member_list);
-        ListView mList= (ListView) findViewById(R.id.mList);
+        final ListView listView= (ListView) findViewById(mList);
         final MemberBean member= new MemberBean();
-        mList.setAdapter(new MemberAdapter(null,this /*this== 지금 이 context*/));
-        findViewById(R.id.btGo).setOnClickListener(new View.OnClickListener(){
+        final MemberList mList=new MemberList(MemberListActivity.this);
+        ListService service=new ListService() {
             @Override
-            public void onClick(View v) {
-                final MemberList mlist=new MemberList(MemberListActivity.this);
-                ListService service=new ListService() {
-                    @Override
-                    public ArrayList<?> list() {
-                        ArrayList<?>list= mlist.list("SELECT _id AS id,name,phone,age,address,salary FROM Member;");
-                        return list;
-                    }
-                };
-                ArrayList<?>list=service.list();
-                    Toast.makeText(MemberListActivity.this, ((MemberBean)list.get(0)).getName(),Toast.LENGTH_LONG).show();
-                    Intent intent=new Intent(MemberListActivity.this,MemberDetailActivity.class);
-                    intent.putExtra("id","");
-                    startActivity(intent);
+            public ArrayList<?> list() {
+                ArrayList<?>list= mList.list("SELECT _id AS id,name,phone,age,address,salary FROM Member;");
+                return list;
+            }
+        };
+        ArrayList<?>list=service.list();
+        Toast.makeText(MemberListActivity.this, ((MemberBean)list.get(0)).getName(),Toast.LENGTH_LONG).show();
+        listView.setAdapter(new MemberAdapter(list,this /*this== 지금 이 context*/)); /*이게 있기때문에 view가 보임*/
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v, int i, long l) {
+                MemberBean member= (MemberBean)listView.getItemAtPosition(i);
+                Intent intent=new Intent(MemberListActivity.this,MemberDetailActivity.class);
+                intent.putExtra("id",member.getId());  /*map 구조롤 가져오는것 생각해!!*/
+                startActivity(intent);
+                Toast.makeText(MemberListActivity.this,"click"+member.getName(),Toast.LENGTH_LONG).show();
+
             }
         });
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View v, int i, long l) {
+                return false;
+            }
+        });
+ /*agile pattern -- */
+
+ /* findViewById(R.id.btGo).setOnClickListener(new View.OnClickListener(){
+ @Override
+ public void onClick(View v) {
+
+ Intent intent=new Intent(MemberListActivity.this,MemberDetailActivity.class);
+ intent.putExtra("id","");
+ startActivity(intent);
+ }
+ });*/
 
     }
     class MemberList extends ListQuery {
@@ -81,7 +104,7 @@ public class MemberListActivity extends AppCompatActivity {
     }
     class MemberAdapter extends BaseAdapter{
         ArrayList<?>list; /*text와 image를 한공간에 조합해서 만드는것*/
-       /* Context context; *//*getSeveletPath를 쓰지않으려고 한다*/
+        /* Context context; *//*getSeveletPath를 쓰지않으려고 한다*/
         LayoutInflater inflater; /*이곳에서 풍선불 장소,주소값을 가지고 있기 때문에 Context를 주지 않아도 됨 */
 
         public MemberAdapter(ArrayList<?> list, Context context) {
@@ -98,17 +121,14 @@ public class MemberListActivity extends AppCompatActivity {
                 R.drawable.icecream,
                 R.drawable.jellybean,
                 R.drawable.kitkat,
-                R.drawable.lollipop,
+                R.drawable.lollipop
         };
-        public MemberAdapter(){
 
-        }
-
-        @Override  /*자동으로 만들어야 할것들*/
+        @Override /*자동으로 만들어야 할것들*/
         public int getCount() {
 
             return list.size();
-        }  /*list's size*/
+        } /*list's size*/
 
         @Override
         public Object getItem(int i) {
@@ -131,6 +151,7 @@ public class MemberListActivity extends AppCompatActivity {
                 holder.profileImg= (ImageView) v.findViewById(R.id.profileImg);
                 holder.tvName= (TextView) v.findViewById(R.id.tvName);
                 holder.tvPhone= (TextView) v.findViewById(R.id.tvPhone);
+                v.setTag(holder); /*있어야해!!*/
             }else{
                 holder= (ViewHolder) v.getTag(); /*in holder contains something, item을 완성해야함*/
             }
@@ -139,14 +160,13 @@ public class MemberListActivity extends AppCompatActivity {
             holder.tvPhone.setText(((MemberBean) list.get(i)).getName());
 
             return v; /*외부에서 받은것을 retrun해주는것이 adapter*/
-         }
+        }
 
-       }
+    }
     static class ViewHolder{
         ImageView profileImg;
         TextView tvName;
         TextView tvPhone;
-        }
     }
-
+}
 
