@@ -3,9 +3,10 @@ package com.hanbit.contentsapp.dao;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-public abstract class DetailQuery extends QueryFactory {
+
+public abstract class UpdateQuery extends QueryFactory{
     SQLiteOpenHelper helper;
-    public DetailQuery(Context context){
+    public UpdateQuery(Context context) {
         super(context);
         helper=new DatabaseHelper(context);
     }

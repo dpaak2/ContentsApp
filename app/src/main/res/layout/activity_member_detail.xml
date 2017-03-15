@@ -5,7 +5,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     // id,name,age,phone,address,salary
-    <TextViewd
+    <TextView
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -192,19 +192,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
+            android:id="@+id/btDial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="20dp"
+            android:text="Dial"/>
+        <Button
             android:id="@+id/btCall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginLeft="20dp"
-            android:text="전화걸기"/>
-        <Button
-            android:id="@+id/btPhone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginLeft="20dp"
-            android:text="전화번호 보기"/>
+            android:text="Call"/>
     </LinearLayout>
 <LinearLayout
     android:orientation="horizontal"
@@ -217,11 +217,13 @@
         android:layout_weight="1"
         android:layout_marginLeft="20dp"
         android:text="목록 가기"/>
+
     <Button
         android:id="@+id/btUpdate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
         android:layout_weight="1"
-        android:text="수정가기"/>
+        android:text="UPDATE" />
 </LinearLayout>
 </LinearLayout>
